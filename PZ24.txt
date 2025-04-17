@@ -3,37 +3,7 @@ using System.Collections.Generic;
 
 namespace UnifiedProject
 {
-    // Классы для автомобилей и фотоаппаратов
-    public class Avto
-    {
-        public string Marka { get; set; }
-        public double Moshnost { get; set; }
-        public int Mesta { get; set; }
-
-        public Avto(string marka, double moshnost, int mesta)
-        {
-            Marka = marka;
-            Moshnost = moshnost;
-            Mesta = mesta;
-        }
-
-        public virtual double Q() => 0.1 * Moshnost - Mesta;
-    }
-
-    public class AvtoProizvodstvo : Avto
-    {
-        public int GodProizvodstva { get; set; }
-
-        public AvtoProizvodstvo(string marka, double moshnost, int mesta, int godProizvodstva)
-            : base(marka, moshnost, mesta) => GodProizvodstva = godProizvodstva;
-
-        public double Qp()
-        {
-            int currentYear = DateTime.Now.Year;
-            return base.Q() - 1.5 * (currentYear - GodProizvodstva);
-        }
-    }
-
+    
     public class Camera
     {
         public string Model { get; set; }
