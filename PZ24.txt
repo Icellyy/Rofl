@@ -23,15 +23,19 @@ namespace UnifiedProject
         public bool IsExpensive() => CalculatePrice() > 200;
     }
 
-    public class DigitalCamera : Camera
+ // Классы для чисел, сотрудников и автоматов
+    public class BaseClass
     {
-        public int Megapixels { get; private set; }
+        public double X { get; set; }
+        public double Y { get; set; }
 
-        public DigitalCamera(string model, double zoom, string bodyMaterial, int megapixels)
-            : base(model, zoom, bodyMaterial) => Megapixels = megapixels;
+        public BaseClass(double x, double y)
+        {
+            X = x;
+            Y = y;
+        }
 
-        public override double CalculatePrice() => base.CalculatePrice() * Megapixels;
-        public void UpgradeModel() => Megapixels += 2;
+        public virtual double Calculate() => X + Y;
     }
 
     // Классы для чисел, сотрудников и автоматов
