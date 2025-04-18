@@ -3,39 +3,15 @@ using System.Collections.Generic;
 
 namespace UnifiedProject
 {
-    
-    public class Camera
+        public class DigitalCamera : Camera
     {
-        public string Model { get; set; }
-        public double Zoom { get; private set; }
-        public string BodyMaterial { get; set; }
+        public int Megapixels { get; private set; }
 
-        public Camera(string model, double zoom, string bodyMaterial)
-        {
-            Model = model;
-            if (zoom < 1 || zoom > 35) throw new ArgumentException("Zoom должен быть от 1 до 35");
-            Zoom = zoom;
-            BodyMaterial = bodyMaterial;
-        }
+        public DigitalCamera(string model, double zoom, string bodyMaterial, int megapixels)
+            : base(model, zoom, bodyMaterial) => Megapixels = megapixels;
 
-        public virtual double CalculatePrice() => BodyMaterial == "plastic" ? (Zoom + 2) * 10 : (Zoom + 2) * 15;
-        public string GetInfo() => $"Модель: {Model}, Zoom: {Zoom}x, Стоимость: ${CalculatePrice():F2}";
-        public bool IsExpensive() => CalculatePrice() > 200;
-    }
-
- // Классы для чисел, сотрудников и автоматов
-    public class BaseClass
-    {
-        public double X { get; set; }
-        public double Y { get; set; }
-
-        public BaseClass(double x, double y)
-        {
-            X = x;
-            Y = y;
-        }
-
-        public virtual double Calculate() => X + Y;
+        public override double CalculatePrice() => base.CalculatePrice() * Megapixels;
+        public void UpgradeModel() => Megapixels += 2;
     }
 
     // Классы для чисел, сотрудников и автоматов
@@ -60,6 +36,26 @@ namespace UnifiedProject
         public DerivedClass(double x, double y, double z) : base(x, y) => Z = z;
         public override double Calculate() => Z == 0 ? throw new DivideByZeroException("Z не может быть нулём") : X / Z;
     }
+
+    public class Camera
+    {
+        public string Model { get; set; }
+        public double Zoom { get; private set; }
+        public string BodyMaterial { get; set; }
+
+        public Camera(string model, double zoom, string bodyMaterial)
+        {
+            Model = model;
+            if (zoom < 1 || zoom > 35) throw new ArgumentException("Zoom должен быть от 1 до 35");
+            Zoom = zoom;
+            BodyMaterial = bodyMaterial;
+        }
+
+        public virtual double CalculatePrice() => BodyMaterial == "plastic" ? (Zoom + 2) * 10 : (Zoom + 2) * 15;
+        public string GetInfo() => $"Модель: {Model}, Zoom: {Zoom}x, Стоимость: ${CalculatePrice():F2}";
+        public bool IsExpensive() => CalculatePrice() > 200;
+    }
+
 
     public class Employee
     {
